@@ -5,6 +5,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.DefenseGames;
+import com.mygdx.game.Score;
+import com.mygdx.game.saveLoadController;
 
 
 public class MenuScreen implements Screen {
@@ -53,6 +55,13 @@ public class MenuScreen implements Screen {
             if (Gdx.input.isTouched()){
                 BackgroundMusic.stop(); // BGM for menu will stop playing and get into main game screen.
                 game.setScreen(new MainGameScreen(game));
+                //debug
+                saveLoadController s = new saveLoadController();
+                Score scr = new Score();
+                scr.addScore();
+                s.saveData(scr);
+
+
             }
 
         }
@@ -104,7 +113,6 @@ public class MenuScreen implements Screen {
             ExitButton = new Texture("Exit-button.png");
             game.batch.draw(ExitButton,DefenseGames.windowsWidth/2.f - 15,DefenseGames.windowsHeight/23.f,90,48);
         }
-
 
         game.batch.end();
     }

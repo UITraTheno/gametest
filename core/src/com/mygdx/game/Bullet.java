@@ -18,7 +18,7 @@ public class Bullet {
     public Bullet(float x, float y){
         this.BulletX = x;
         this.BulletY = y;
-        this.collision = new Collision(BulletX,BulletY,60,20);
+        this.collision = new Collision(BulletX,BulletY,60,20,1);
         if(bullet == null){
             bullet = new Texture("bullet.png");
         }

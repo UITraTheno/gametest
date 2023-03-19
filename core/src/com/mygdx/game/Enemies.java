@@ -27,7 +27,7 @@ public class Enemies {
                 enemy = new Texture("BoostLeft.png");
             }
         }
-        this.collision = new Collision(x,y,60,30);
+        this.collision = new Collision(x,y,60,30,2);
     }
 
     // update the location of the enemies. If they have collision which other objects, move it

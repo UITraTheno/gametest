@@ -9,6 +9,10 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -29,6 +33,7 @@ public class MainGameScreen implements Screen {
 
     public static final float Min_SpawnTime = 1.8f;
     public static final  float Max_SpawnTime = 2.f;
+    private final static String DATABASE_URL = "jdbc:sqlite:D:\\gametest\\database\\gameData.db";
     public MainGameScreen(DefenseGames game){
         this.game = game;
         scoreFont = new BitmapFont(Gdx.files.internal("score.fnt"));
@@ -101,7 +106,22 @@ public class MainGameScreen implements Screen {
                 enemyToMove.add(enemies);
                 build.getDamage();
                 if(build.getBuildingHealth() == 0){
-                    // game over
+                    // game over insert score to database
+                    try(Connection connection = DriverManager.getConnection(DATABASE_URL);
+                        Statement statement = connection.createStatement()){
+                        Class.forName("org.sqlite.JDBC");
+                        int gameScore = score.getFinalScore();
+                        String sql = "insert into gameScore (Score) values('" + gameScore + "')";
+                        int rowAffected = statement.executeUpdate(sql);
+                        if(rowAffected > 0){
+                            System.out.println("Data has already be inserted");
+                        }
+                        else{
+                            System.out.println("Data cannot be inserted");
+                        }
+                    }catch (SQLException | ClassNotFoundException e){
+                        System.err.println(e.getMessage());
+                    }
                     BackgroundMusic.stop(); // stop music
                     game.setScreen(new GameOverScreen(game));
 

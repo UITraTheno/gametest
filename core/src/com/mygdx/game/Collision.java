@@ -1,13 +1,15 @@
 package com.mygdx.game;
 
 public class Collision {
+    int objID = 0; // 1 - player, building bullet     2 - enemy
     float x,y;
     int width,height;
 
-    public Collision(float x, float y, int width, int height){
+    public Collision(float x, float y, int width, int height, int objid){
         this.x = x;
         this.y = y;
         this.width = width;
+        objID = objid;
         this.height = height;
     }
 
@@ -17,7 +19,10 @@ public class Collision {
     }
 
     public boolean isCollide(Collision c){
-        return( x < c.x + c.width && y < c.y + c.height && x > c.x - width && y > c.y - c.height);
+        if (objID != c.objID){
+            return( x < c.x + c.width && y < c.y + c.height && x > c.x - width && y > c.y - c.height);
+        }
+        return false;
     }
 
 }

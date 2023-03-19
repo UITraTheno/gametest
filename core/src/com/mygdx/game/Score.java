@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 public class Score {
     private int finalScore;
+    String scoreData = "122";
 
     // Initial the game final score
     public Score(){

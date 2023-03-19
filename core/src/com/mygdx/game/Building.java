@@ -14,7 +14,7 @@ public class Building {
         game.batch.draw(Fortress,BuildX,BuildY,100,100);
     }
 
-    Collision collision = new Collision(BuildX,BuildY,100,100);
+    Collision collision = new Collision(BuildX,BuildY,100,100,1);
 
     public int getBuildingHealth(){
         return buildingHealth;
