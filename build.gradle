@@ -62,6 +62,7 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion"
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        
+        //implementation fileTree("libs\\json-20230227.jar")
+        implementation fileTree(dir:"../libs", include: "*.jar")
     }
 }

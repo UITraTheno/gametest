@@ -11,6 +11,12 @@ import com.mygdx.game.DefenseGames;
 
 //import javax.xml.soap.Text;
 
+/**
+ * Class name: GameOverScreen
+ * Description: in this class, I'm trying to design the Screen for "Game Over" page. In this page, I set the button "Home"
+ * which will help player get into the main game screen. Also i set the special bgm and background for this screen.
+ */
+
 public class GameOverScreen implements Screen {
 
     DefenseGames game;
@@ -23,7 +29,10 @@ public class GameOverScreen implements Screen {
     //private Thread myThread2;
     //private Thread myThread3;
 
-
+    /**
+     * Method name: GameOverScreen
+     * Description: This method is using for initializing the background image and bgm.
+     */
 
     public GameOverScreen(DefenseGames game){
         this.game=game;
@@ -34,6 +43,8 @@ public class GameOverScreen implements Screen {
         word = new Texture("OverTxt.png");
 
     }
+
+    // Method will be using for play bgm
     @Override
     public void show() {
         // Play the BGM
@@ -41,6 +52,8 @@ public class GameOverScreen implements Screen {
         backGroundMusic.play();
     }
 
+    // The main part of this method is setting the action for the "Home" button. When player click the button, the screen
+    // will go back to the menu.
     @Override
     public void render(float delta) {
 

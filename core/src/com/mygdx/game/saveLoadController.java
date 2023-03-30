@@ -3,11 +3,18 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
 import jdk.nashorn.internal.parser.JSONParser;
+//import org.json.simple.JSONArray;
 
+//import org.json.simple.JSONObject;
+
+//import org.json.simple.parser.*;
 
 import java.io.*;
 import java.nio.file.Files;
 
+/**
+ *  This class is used for switch the data to json document. Not Complete yet!
+ */
 
 public class saveLoadController {
     public static void saveData(Score s){
@@ -32,7 +39,7 @@ public class saveLoadController {
         }
         try (PrintWriter out = new PrintWriter(new FileWriter(path))) {
             out.write(json.toString());
-            System.out.println(json.);
+            //System.out.println(json.);
         } catch (Exception e) {
             e.printStackTrace();
         }

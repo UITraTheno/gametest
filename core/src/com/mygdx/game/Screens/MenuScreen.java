@@ -4,9 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.DefenseGames;
 import com.mygdx.game.Score;
 import com.mygdx.game.saveLoadController;
+
+import java.sql.*;
 
 
 public class MenuScreen implements Screen {
@@ -19,6 +22,10 @@ public class MenuScreen implements Screen {
     Texture ScoreButton;
     Texture ExitButton;
     Music BackgroundMusic;
+    BitmapFont font;
+    int score;
+    private final static String DATABASE_URL = "jdbc:sqlite:D:\\gametest\\database\\gameData.db";
+    String highestScore;
     public MenuScreen(DefenseGames game){
         this.game = game;
         Background = new Texture("main-picture.png");
@@ -26,7 +33,22 @@ public class MenuScreen implements Screen {
         ScoreButton = new Texture("score-button.png");
         ExitButton = new Texture("Exit-button.png");
         BackgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Menu-BGM.mp3"));
+        font = new BitmapFont(Gdx.files.internal("score.fnt"));
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
 
+
+        }
+        try(Connection connection = DriverManager.getConnection(DATABASE_URL);
+            Statement statement = connection.createStatement()){
+            String sql = "select max(Score) from gameScore";
+            ResultSet result = statement.executeQuery(sql);
+            score = result.getInt("max(Score)");
+            System.out.println("Score " + score);
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     @Override
@@ -82,10 +104,8 @@ public class MenuScreen implements Screen {
 
             ScoreButton = new Texture("score-button1.png");
             game.batch.draw(ScoreButton,DefenseGames.windowsWidth/2.f - 15,DefenseGames.windowsHeight/8.f,90,50);
-            if (Gdx.input.isTouched()){
-                BackgroundMusic.stop(); // BGM for menu will stop playing and get into main game screen.
-                game.setScreen(new GameOverScreen(game));
-            }
+            String output = String.valueOf(score);
+            font.draw(game.batch, output,DefenseGames.windowsWidth/2.f + 180,DefenseGames.windowsHeight/8.f);
 
         }
         else{
