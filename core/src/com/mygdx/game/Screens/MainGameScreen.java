@@ -3,9 +3,11 @@ package com.mygdx.game.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.*;
 
@@ -14,6 +16,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 
@@ -30,7 +33,7 @@ import java.util.Random;
 public class MainGameScreen implements Screen {
 
     DefenseGames game;
-    Player player = new Player();
+    Player p = new Player();
     Building build = new Building();
     Texture Background;
     Music BackgroundMusic;
@@ -97,10 +100,11 @@ public class MainGameScreen implements Screen {
             playerX += Speed;
         }
 */
+        // Start to batch each element in the game
         game.batch.begin(); // start to batch images for the game
 
         // update the location of the player
-        player.movement();
+        p.movement();
         game.batch.draw(Background, 0, 0);
         build.setBuilding(game);
         enemySpawnTimer -= delta;
@@ -149,6 +153,14 @@ public class MainGameScreen implements Screen {
                     }catch (SQLException e){
                         System.err.println(e.getMessage());
                     }
+
+                    Json json = new Json();
+                    long currentTimemil = System.currentTimeMillis();
+                    Date curTime = new Date(currentTimemil);
+                    String DateInfor = json.toJson(score.getFinalScore() + ": " + curTime.toString());
+                    FileHandle file = Gdx.files.local("Score.json");
+                    file.writeString(DateInfor, false);
+
                     BackgroundMusic.stop(); // stop music
                     game.setScreen(new GameOverScreen(game));
 
@@ -157,7 +169,7 @@ public class MainGameScreen implements Screen {
         }
 
         // check the collision for both bullet and enemy. both enemy and bullet will be removed if they touch together.
-        for (Bullet bullet: player.getBullets()){
+        for (Bullet bullet: p.getBullets()){
             for (Enemies enemies: enemy){
                 if (bullet.getCollision().isCollide(enemies.getCollision())){
                     enemyToMove.add(enemies);
@@ -167,7 +179,7 @@ public class MainGameScreen implements Screen {
             }
         }
         enemy.removeAll(enemyToMove);
-        player.shot(game,delta,enemy);
+        p.shot(game,delta,enemy);
 
 
         // batch enemy, bullet, player here
@@ -175,12 +187,12 @@ public class MainGameScreen implements Screen {
             enemy.render(game.batch);
         }
 
-        for (Bullet bullet : player.getBullets()){
+        for (Bullet bullet : p.getBullets()){
             bullet.render(game.batch);
         }
 
 
-        player.setSoldier(game);
+        p.setSoldier(game);
 
         GlyphLayout scoreLayout = new GlyphLayout(scoreFont, "" + score.getFinalScore());
         scoreFont.draw(game.batch, scoreLayout, Gdx.graphics.getWidth() / 2.f - scoreLayout.width / 2.f, Gdx.graphics.getHeight() - scoreLayout.height - 10);
@@ -217,7 +229,7 @@ public class MainGameScreen implements Screen {
         //this.dispose();
         BackgroundMusic.dispose();
         game.batch.dispose();
-        player.disposePlayer();
+        p.disposePlayer();
         Background.dispose();
         build.disposeBuilding();
 

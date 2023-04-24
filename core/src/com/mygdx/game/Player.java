@@ -5,8 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Intersector;
+
 
 import java.util.ArrayList;
 
@@ -64,9 +63,7 @@ public class Player {
 
         bullets.removeAll(bulletToRemove);
 
-        //for (Bullet bullet : bullets){
-          //  bullet.render(game.batch);
-        //}
+
 
 
     }
@@ -82,7 +79,8 @@ public class Player {
 
         if (Gdx.input.isKeyPressed(Input.Keys.W)){
             //playerY += Speed;
-            // set collision for character when moving up
+            // set collision for character when moving up. Character cannot be moved when there is the collision
+            // building and itself
             if(playerX >= Building.BuildX - 40 && playerX <= Building.BuildX + 80 && playerY >= Building.BuildY - 80 && playerY <= Building.BuildY + 80){
                 System.out.println("ERROR");
             }
@@ -96,7 +94,8 @@ public class Player {
 
         if(Gdx.input.isKeyPressed(Input.Keys.S)){
             //playerY -= Speed;
-            // set collision for character when moving down
+            // set collision for character when moving down. Character cannot be moved when there is the collision
+            // building and itself
             if(playerX >= Building.BuildX - 40 && playerX <= Building.BuildX + 80 && playerY >= Building.BuildY - 70 && playerY <= Building.BuildY + 100){
                 System.out.println("ERROR");
             }
@@ -107,7 +106,7 @@ public class Player {
                 playerY -= Speed;
             }
         }
-
+        // the player image will be changed dependenting on where player face to
         if (Gdx.input.isKeyPressed(Input.Keys.A)){
             if(!faceLeft){
                 bullets.removeAll(bullets);
@@ -115,7 +114,8 @@ public class Player {
             }
             soldier = new Texture("IdleLeft.png");
             //playerX -= Speed;
-            // set collision for character when moving left
+            // set collision for character when moving left. Character cannot be moved when there is the collision
+            // building and itself
             if(playerX >= Building.BuildX - 40 && playerX <= Building.BuildX + 90 && playerY >= Building.BuildY - 70 && playerY <= Building.BuildY + 80){
                 System.out.println("ERROR");
             }
@@ -134,7 +134,8 @@ public class Player {
             }
             soldier = new Texture("IdleRight.png");
             //playerX += Speed;
-            // set collision for character when moving right
+            // set collision for character when moving right.Character cannot be moved when there is the collision
+            // building and itself
             if(playerX >= Building.BuildX - 60 && playerX <= Building.BuildX + 60 && playerY >= Building.BuildY - 70 && playerY <= Building.BuildY + 80){
                 System.out.println("ERROR");
             }

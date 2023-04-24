@@ -3,6 +3,10 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+
+/**
+ * This class is used for multithreading. Getting in trouble on batch the image, still working on it.
+ */
 public class MyRunnable implements Runnable{
 
     Texture enemy = new Texture("BoostRight.png");
@@ -23,6 +27,7 @@ public class MyRunnable implements Runnable{
         this.time = time;
     }
 
+    // run the thread here
     @Override
     public void run() {
         locX += Speed * time;

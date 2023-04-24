@@ -7,10 +7,19 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.DefenseGames;
 import com.mygdx.game.Score;
-import com.mygdx.game.saveLoadController;
+
 
 import java.sql.*;
 
+/**
+ *  Class name: MenuScreen.java
+ *  Yilin Li
+ *  Description: This class will be used for showing the highest score in the history, and help player get into the game
+ *  or close the game window. In ,emi screen, we can find three main buttons- "Start","Score", and  "Exit".
+ *  when player click "Start" button, game be started
+ *  when player click "Score" button, show the highest score in the history
+ *  when player click "Exit" button, close the game window.
+ */
 
 public class MenuScreen implements Screen {
     DefenseGames game;
@@ -78,10 +87,7 @@ public class MenuScreen implements Screen {
                 BackgroundMusic.stop(); // BGM for menu will stop playing and get into main game screen.
                 game.setScreen(new MainGameScreen(game));
                 //debug
-                saveLoadController s = new saveLoadController();
-                Score scr = new Score();
-                scr.addScore();
-                s.saveData(scr);
+
 
 
             }

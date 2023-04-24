@@ -7,23 +7,26 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 //import com.mygdx.game.Building;
 import com.mygdx.game.DefenseGames;
+
 //import com.mygdx.game.MyRunnable;
+
 
 //import javax.xml.soap.Text;
 
 /**
  * Class name: GameOverScreen
  * Description: in this class, I'm trying to design the Screen for "Game Over" page. In this page, I set the button "Home"
- * which will help player get into the main game screen. Also i set the special bgm and background for this screen.
+ * which will help player get into the main game screen. Also， I set the special bgm and background for this screen.
  */
 
-public class GameOverScreen implements Screen {
+public class GameOverScreen implements Screen{
 
     DefenseGames game;
     Texture backGround;
     Texture building;
     Texture Button;
     Texture word;
+    String PlayerName;
     Music backGroundMusic;
     //private Thread myThread1;
     //private Thread myThread2;
@@ -56,7 +59,16 @@ public class GameOverScreen implements Screen {
     // will go back to the menu.
     @Override
     public void render(float delta) {
+        //Score score = new Score();
+        //        Json json = new Json();
+        //        long currentTimemil = System.currentTimeMillis();
+        //        Date curTime = new Date(currentTimemil);
+        //        String DateInfor = json.toJson(score.getFinalScore() + ": " + curTime.toString());
+        //        FileHandle file = Gdx.files.local("Score.json");
+        //        file.writeString(DateInfor, false);
 
+
+        // starting to batch each element in the game
         game.batch.begin();
         game.batch.draw(backGround,0,0);
         game.batch.draw(building,1000,0,400,250);
@@ -67,6 +79,10 @@ public class GameOverScreen implements Screen {
         //myThread2.start();
         //myThread3.start();
         game.batch.draw(word,Gdx.graphics.getWidth()/4.f,Gdx.graphics.getHeight()/2.f);
+
+
+        // when the mouse touch on the image home button, image will be changed and remind user ready to click on,
+        // if player click the button image, go to the menu Screen
         if(Gdx.input.getX() > DefenseGames.windowsWidth/3.f && Gdx.input.getX() < DefenseGames.windowsWidth/3.f + 170
         && DefenseGames.windowsHeight - Gdx.input.getY() > DefenseGames.windowsHeight/4.f &&
                 DefenseGames.windowsHeight- Gdx.input.getY() < DefenseGames.windowsHeight/4.f + 100){
@@ -80,6 +96,7 @@ public class GameOverScreen implements Screen {
             Button = new Texture("home-button.png");
             game.batch.draw(Button,DefenseGames.windowsWidth/3.f,DefenseGames.windowsHeight/4.f,200,80);
         }
+
         //game.batch.draw(Button,Gdx.graphics.getWidth()/3.f,Gdx.graphics.getHeight()/4.f,200,80);
         game.batch.end();
     }
@@ -108,4 +125,6 @@ public class GameOverScreen implements Screen {
     public void dispose() {
 
     }
+
+
 }
