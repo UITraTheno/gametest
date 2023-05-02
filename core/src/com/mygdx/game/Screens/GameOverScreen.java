@@ -80,9 +80,10 @@ public class GameOverScreen implements Screen{
         //myThread3.start();
         game.batch.draw(word,Gdx.graphics.getWidth()/4.f,Gdx.graphics.getHeight()/2.f);
 
-
-        // when the mouse touch on the image home button, image will be changed and remind user ready to click on,
-        // if player click the button image, go to the menu Screen
+        /**
+            when the mouse touch on the image home button, image will be changed and remind user ready to click on,
+            if player click the button image, go to the menu Screen
+         **/
         if(Gdx.input.getX() > DefenseGames.windowsWidth/3.f && Gdx.input.getX() < DefenseGames.windowsWidth/3.f + 170
         && DefenseGames.windowsHeight - Gdx.input.getY() > DefenseGames.windowsHeight/4.f &&
                 DefenseGames.windowsHeight- Gdx.input.getY() < DefenseGames.windowsHeight/4.f + 100){

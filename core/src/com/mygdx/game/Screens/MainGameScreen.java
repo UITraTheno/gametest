@@ -82,24 +82,7 @@ public class MainGameScreen implements Screen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(1, 0, 0, 1);
-// Player movement following key inputs
-        /**
-        if (Gdx.input.isKeyPressed(Input.Keys.W)){
-            playerY += Speed;
-        }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.S)){
-            playerY -= Speed;
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.A)){
-            playerX -= Speed;
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.D)){
-            playerX += Speed;
-        }
-*/
         // Start to batch each element in the game
         game.batch.begin(); // start to batch images for the game
 
